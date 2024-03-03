@@ -1,0 +1,30 @@
+plugins {
+    id 'org.gretty' version '4.0.3'
+}
+
+subprojects {
+
+    version = '1.0'
+    group = 'com.vitevskii.gradle'
+
+    repositories {
+        // Use Maven Central for resolving dependencies.
+        mavenCentral()
+    }
+    apply plugin: 'java'
+//    dependencies {
+//        testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+//    }
+}
+
+project(':web') {
+    apply plugin: 'war'
+    apply plugin: 'org.gretty'
+    dependencies {
+        compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
+        implementation project(':data')
+    }
+}
+
+project(':data') {
+}
